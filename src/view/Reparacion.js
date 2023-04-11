@@ -7,16 +7,23 @@ import { async } from '@firebase/util'
 import Select2 from 'react-native-select-two'
 import { nombres } from '../../public/nombres'
 import { estados } from '../../public/estados'
+// import DatePicker from 'react-native-date-picker'
 // import { Text, View, Button } from 'react-native'
 
 function Reparacion ({navigation}) {
-    
+    // const [date, setDate] = useState(new Date())
+    // const [open, setOpen] = useState(false)
     const [newitem, setNewitem] = useState({
         numeroTicket: '',
+        descripcion: '',
         nombre: '',
         localidad: '',
+        plataforma: '',
+        fechaInicio: '',
+        TipoMantenimiento: '',
         estado: '',
         observacion: '',
+        fechaAtencian: '',
         tiempo: new Date(),
     })
 
@@ -29,8 +36,20 @@ function Reparacion ({navigation}) {
   
     return (
       <RN.View style={{ flex: 1, alignItems: 'center' }}>
-        <RN.Text style={{ fontSize: 32, fontWeight: '700' }}> Seguimiento TT </RN.Text>
+        <RN.Text style={{ fontSize: 32, fontWeight: '700' }}> Asignacion de Ticket </RN.Text>
         {/* <hr /> */}
+
+        <RN.TextInput 
+            onChangeText={(text) => setNewitem({...newitem, numeroTicket:text })}
+            placeholder='Numero de Ticket'
+            style={{ width: '90%',
+            padding: 13,
+            marginVertical: 6,
+            borderWidth: 1,
+            borderColor: '#ddd',
+            borderRadius: 6 }}
+        />
+
         <Select2
             isSelectSingle
             style={{ width: '90%',
@@ -41,7 +60,7 @@ function Reparacion ({navigation}) {
             borderRadius: 6 }}
             colorTheme="blue"
             popupTitle="Nombres"
-            title="Nombre Completo"
+            title="Responsable"
             cancelButtonText='cancelar'
             selectButtonText='seleccionar'
             searchPlaceHolderText='Buscar'
@@ -59,8 +78,8 @@ function Reparacion ({navigation}) {
         />
 
         <RN.TextInput 
-            onChangeText={(text) => setNewitem({...newitem, numeroTicket:text })}
-            placeholder='Numero de Ticket'
+            onChangeText={(text) => setNewitem({...newitem, descripcion:text })}
+            placeholder='Descripcion'
             style={{ width: '90%',
             padding: 13,
             marginVertical: 6,
@@ -79,6 +98,30 @@ function Reparacion ({navigation}) {
             borderColor: '#ddd',
             borderRadius: 6 }}
         />
+
+        <RN.TextInput 
+            onChangeText={(text) => setNewitem({...newitem, plataforma:text })}
+            placeholder='Plataforma'
+            style={{ width: '90%',
+            padding: 13,
+            marginVertical: 6,
+            borderWidth: 1,
+            borderColor: '#ddd',
+            borderRadius: 6 }}
+        />
+
+         {/* <DatePicker 
+            modal
+            open={open}
+            date={date}
+            onConfirm={(date) => {
+              setOpen(false)
+              setDate(date)
+            }}
+            onCancel={() => {
+              setOpen(false)
+            }}
+         />  */}
 
         <Select2 
             isSelectSingle
