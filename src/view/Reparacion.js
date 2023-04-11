@@ -4,14 +4,18 @@ import { useState, useEffect } from 'react'
 import { database } from '../config/fb'
 import { collection, addDoc } from 'firebase/firestore'
 import { async } from '@firebase/util'
+import Select2 from 'react-native-select-two'
+import { nombres } from '../../public/nombres'
+import { estados } from '../../public/estados'
 // import { Text, View, Button } from 'react-native'
 
 function Reparacion ({navigation}) {
-
     
     const [newitem, setNewitem] = useState({
-        falla: '',
-        solucion: '',
+        numeroTicket: '',
+        nombre: '',
+        localidad: '',
+        estado: '',
         observacion: '',
         tiempo: new Date(),
     })
@@ -25,11 +29,38 @@ function Reparacion ({navigation}) {
   
     return (
       <RN.View style={{ flex: 1, alignItems: 'center' }}>
-        <RN.Text style={{ fontSize: 32, fontWeight: '700' }}> Reparacion </RN.Text>
+        <RN.Text style={{ fontSize: 32, fontWeight: '700' }}> Seguimiento TT </RN.Text>
+        {/* <hr /> */}
+        <Select2
+            isSelectSingle
+            style={{ width: '90%',
+            padding: 13,
+            marginVertical: 6,
+            borderWidth: 1,
+            borderColor: '#ddd',
+            borderRadius: 6 }}
+            colorTheme="blue"
+            popupTitle="Nombres"
+            title="Nombre Completo"
+            cancelButtonText='cancelar'
+            selectButtonText='seleccionar'
+            searchPlaceHolderText='Buscar'
+            data={nombres}
+            onSelect={data => {
+                setNewitem({...newitem, nombre:data })
+                // setEstNombre({ data })
+                console.log(data)
+            }}
+            onRemoveItem={data => {
+                setNewitem({...newitem, nombre:data })
+                // setEstNombre({ data })
+                console.log(data)
+            }}
+        />
 
         <RN.TextInput 
-            onChangeText={(text) => setNewitem({...newitem, falla:text })}
-            placeholder='Falla o Daño'
+            onChangeText={(text) => setNewitem({...newitem, numeroTicket:text })}
+            placeholder='Numero de Ticket'
             style={{ width: '90%',
             padding: 13,
             marginVertical: 6,
@@ -39,8 +70,8 @@ function Reparacion ({navigation}) {
         />
 
         <RN.TextInput 
-            onChangeText={(text) => setNewitem({...newitem, solucion:text })}
-            placeholder='Solucion del Daño'
+            onChangeText={(text) => setNewitem({...newitem, localidad:text })}
+            placeholder='Localidad'
             style={{ width: '90%',
             padding: 13,
             marginVertical: 6,
@@ -49,6 +80,32 @@ function Reparacion ({navigation}) {
             borderRadius: 6 }}
         />
 
+        <Select2 
+            isSelectSingle
+            style={{ width: '90%',
+            padding: 13,
+            marginVertical: 6,
+            borderWidth: 1,
+            borderColor: '#ddd',
+            borderRadius: 6 }}
+            colorTheme="blue"
+            popupTitle="Estado"
+            title="Estado"
+            cancelButtonText='cancelar'
+            selectButtonText='seleccionar'
+            searchPlaceHolderText='Buscar'
+            data={estados}
+            onSelect={data => {
+                setNewitem({...newitem, estado:data })
+                // setEEstados({ data })
+                console.log(data)
+            }}
+            onRemoveItem={data => {
+                setNewitem({...newitem, estado:data })
+                // setEEstados({ data })
+                console.log(data)
+            }}
+        />
         <RN.TextInput 
             onChangeText={(text) => setNewitem({...newitem, observacion:text })}
             placeholder='Observacion breve de la Solucion'
