@@ -1,7 +1,7 @@
 export const estados = [
-    {id: 1, name: 'Aplazado'},
-    {id: 2, name: 'Atendido'},
-    {id: 3, name: 'Enviado a Cierre'},
-    {id: 4, name: 'Cancelado'},
-    {id: 5, name: 'En Curso'},
+    {id: 'Aplazado', name: 'Aplazado'},
+    {id: 'Atendido', name: 'Atendido'},
+    {id: 'Enviado a Cierre', name: 'Enviado a Cierre'},
+    {id: 'Cancelado', name: 'Cancelado'},
+    {id: 'En Curso', name: 'En Curso'},
 ]

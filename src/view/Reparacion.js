@@ -7,6 +7,8 @@ import { async } from '@firebase/util'
 import Select2 from 'react-native-select-two'
 import { nombres } from '../../public/nombres'
 import { estados } from '../../public/estados'
+import { tipoMantenimiento } from '../../public/tipoMantenimiento'
+import { plataforma } from '../../public/plataforma'
 // import DatePicker from 'react-native-date-picker'
 // import { Text, View, Button } from 'react-native'
 
@@ -19,12 +21,12 @@ function Reparacion ({navigation}) {
         nombre: '',
         localidad: '',
         plataforma: '',
-        fechaInicio: '',
+        fechaInicio: new Date(),
         TipoMantenimiento: '',
-        estado: '',
-        observacion: '',
-        fechaAtencian: '',
-        tiempo: new Date(),
+        estado: 'Asignado',
+        // observacion: '',
+        // fechaAtencion: '',
+        // tiempo: new Date(),
     })
 
     const fectData = async () =>{
@@ -99,15 +101,31 @@ function Reparacion ({navigation}) {
             borderRadius: 6 }}
         />
 
-        <RN.TextInput 
-            onChangeText={(text) => setNewitem({...newitem, plataforma:text })}
-            placeholder='Plataforma'
+        <Select2 
+            isSelectSingle
             style={{ width: '90%',
             padding: 13,
             marginVertical: 6,
             borderWidth: 1,
             borderColor: '#ddd',
             borderRadius: 6 }}
+            colorTheme="blue"
+            popupTitle="Plataforma"
+            title="Plataforma"
+            cancelButtonText='cancelar'
+            selectButtonText='seleccionar'
+            searchPlaceHolderText='Buscar'
+            data={plataforma}
+            onSelect={data => {
+                setNewitem({...newitem, plataforma:data })
+                // setEEstados({ data })
+                console.log(data)
+            }}
+            onRemoveItem={data => {
+                setNewitem({...newitem, plataforma:data })
+                // setEEstados({ data })
+                console.log(data)
+            }}
         />
 
          {/* <DatePicker 
@@ -132,24 +150,24 @@ function Reparacion ({navigation}) {
             borderColor: '#ddd',
             borderRadius: 6 }}
             colorTheme="blue"
-            popupTitle="Estado"
-            title="Estado"
+            popupTitle="Tipo de Mantenimiento"
+            title="Tipo de Mantenimiento"
             cancelButtonText='cancelar'
             selectButtonText='seleccionar'
             searchPlaceHolderText='Buscar'
-            data={estados}
+            data={tipoMantenimiento}
             onSelect={data => {
-                setNewitem({...newitem, estado:data })
+                setNewitem({...newitem, TipoMantenimiento:data })
                 // setEEstados({ data })
                 console.log(data)
             }}
             onRemoveItem={data => {
-                setNewitem({...newitem, estado:data })
+                setNewitem({...newitem, TipoMantenimiento:data })
                 // setEEstados({ data })
                 console.log(data)
             }}
         />
-        <RN.TextInput 
+        {/* <RN.TextInput 
             onChangeText={(text) => setNewitem({...newitem, observacion:text })}
             placeholder='Observacion breve de la Solucion'
             style={{ width: '90%',
@@ -158,7 +176,7 @@ function Reparacion ({navigation}) {
             borderWidth: 1,
             borderColor: '#ddd',
             borderRadius: 6 }}
-        />
+        /> */}
 
         <RN.Button
             title='Guardar' 

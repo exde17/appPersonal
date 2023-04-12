@@ -32,7 +32,7 @@ export default function App() {
   return (
     
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Reparacion">
+      <Stack.Navigator initialRouteName="Home">
       
         <Stack.Screen name="Home" component={Home} options={{ title: 'mi inicio' }} />
         <Stack.Screen name="Reparacion" component={Reparacion} options={{ title: 'mi reparacion' }} />
